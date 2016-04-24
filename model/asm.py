@@ -8,6 +8,7 @@ This is a temporary script file.
 import numpy as np
 from numpy.core.umath_tests import matrix_multiply
 from numpy.linalg import svd
+from sklearn.decomposition import PCA
 
 #f = np.array([[[0, 1, 2], [10, 11, 12]], [[3, 4, 5], [6, 7, 8]]], dtype = np.float)
 def procrustes2d(f):
@@ -75,7 +76,7 @@ def procrustes2d(f):
     
 #procrustes2d(f)
 
-#f = np.array([[[0, 1, 2], [10, 11, 12], [0, 1, 2]], [[3, 4, 5], [6, 7, 8], [0, 1, 2]]], dtype = np.float)
+f = np.array([[[0, 1, 2], [10, 11, 12], [0, 1, 2]], [[3, 4, 5], [6, 7, 8], [0, 1, 2]]], dtype = np.float)
 def procrustes3d(f):
     # zero mean normalize input aray
     mean = np.mean(np.mean(f, axis = 0), axis = 1).reshape(3, 1)
@@ -116,22 +117,16 @@ def procrustes3d(f):
 #procrustes3d(f)
 
 #pca
-def pca(matrixAfterPro, metric, is2d):    
+def pca(matrixAfterPro, metric, isWhiten):
+    if(type(metric) != float):
+        raise Exception("metric type error!")
+        
     shape = np.shape(matrixAfterPro)
     matrixAfterPro = np.reshape(matrixAfterPro, (shape[0], shape[1]*shape[2]))
-    U, S, v = svd(matrixAfterPro, full_matrices = False)
-    V = v.T
     
-    score = np.diag(S)
-    # check how many components need to achieve preversing metric stuff
-    num = 0    
-    percentage = 0
-    for x in score:
-        percentage += x
-        num += 1
-        if(percentage > metric):
-            break
+    pca = PCA(n_components = metric, whiten = isWhiten)
+    matrixAfterPCA = pca.fit_transform(matrixAfterPro)
     
-    matrixAfterPCA = np.dot(U[:, :20], np.dot(S[:20, :20], V[:,:20].T))
     return matrixAfterPCA
-    
+
+print(pca(f, np.float(0.98), False))
