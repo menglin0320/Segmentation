@@ -1,0 +1,143 @@
+src/caffe/test/test_spatial_transformer_layer.cpp: In constructor ‘caffe::SpatialTransformerLayerTest<TypeParam>::SpatialTransformerLayerTest()’:
+src/caffe/test/test_spatial_transformer_layer.cpp:81:38: warning: extended initializer lists only available with -std=c++11 or -std=gnu++11 [enabled by default]
+         : blob_data_(new Blob<Dtype>(vector<int>{2, 3, 5, 9})),
+                                      ^
+src/caffe/test/test_spatial_transformer_layer.cpp:82:37: warning: extended initializer lists only available with -std=c++11 or -std=gnu++11 [enabled by default]
+         blob_theta_(new Blob<Dtype>(vector<int>{2, 6})),
+                                     ^
+src/caffe/test/test_spatial_transformer_layer.cpp: In instantiation of ‘caffe::SpatialTransformerLayerTest<TypeParam>::SpatialTransformerLayerTest() [with TypeParam = caffe::GPUDevice<double>]’:
+src/caffe/test/test_spatial_transformer_layer.cpp:456:5:   required from ‘testing::Test* testing::internal::TestFactoryImpl<TestClass>::CreateTest() [with TestClass = caffe::SpatialTransformerLayerTest_TestThetaGradient_Test<caffe::GPUDevice<double> >]’
+src/caffe/test/test_spatial_transformer_layer.cpp:485:1:   required from here
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: error: no matching function for call to ‘std::vector<int>::vector(<brace-enclosed initializer list>)’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note: candidates are:
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note: template<class _InputIterator> std::vector<_Tp, _Alloc>::vector(_InputIterator, _InputIterator, const allocator_type&)
+         vector(_InputIterator __first, _InputIterator __last,
+         ^
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note:   template argument deduction/substitution failed:
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note:   cannot convert ‘5’ (type ‘int’) to type ‘const allocator_type& {aka const std::allocator<int>&}’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note: std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]
+       vector(const vector& __x)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note: std::vector<_Tp, _Alloc>::vector(std::vector<_Tp, _Alloc>::size_type, const value_type&, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::size_type = long unsigned int; std::vector<_Tp, _Alloc>::value_type = int; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(size_type __n, const value_type& __value = value_type(),
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note:   candidate expects 3 arguments, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note: std::vector<_Tp, _Alloc>::vector(const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(const allocator_type& __a)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note: std::vector<_Tp, _Alloc>::vector() [with _Tp = int; _Alloc = std::allocator<int>]
+       vector()
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note:   candidate expects 0 arguments, 4 provided
+src/caffe/test/test_spatial_transformer_layer.cpp: In instantiation of ‘caffe::SpatialTransformerLayerTest<TypeParam>::SpatialTransformerLayerTest() [with TypeParam = caffe::GPUDevice<float>]’:
+src/caffe/test/test_spatial_transformer_layer.cpp:456:5:   required from ‘testing::Test* testing::internal::TestFactoryImpl<TestClass>::CreateTest() [with TestClass = caffe::SpatialTransformerLayerTest_TestThetaGradient_Test<caffe::GPUDevice<float> >]’
+src/caffe/test/test_spatial_transformer_layer.cpp:485:1:   required from here
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: error: no matching function for call to ‘std::vector<int>::vector(<brace-enclosed initializer list>)’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note: candidates are:
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note: template<class _InputIterator> std::vector<_Tp, _Alloc>::vector(_InputIterator, _InputIterator, const allocator_type&)
+         vector(_InputIterator __first, _InputIterator __last,
+         ^
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note:   template argument deduction/substitution failed:
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note:   cannot convert ‘5’ (type ‘int’) to type ‘const allocator_type& {aka const std::allocator<int>&}’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note: std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]
+       vector(const vector& __x)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note: std::vector<_Tp, _Alloc>::vector(std::vector<_Tp, _Alloc>::size_type, const value_type&, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::size_type = long unsigned int; std::vector<_Tp, _Alloc>::value_type = int; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(size_type __n, const value_type& __value = value_type(),
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note:   candidate expects 3 arguments, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note: std::vector<_Tp, _Alloc>::vector(const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(const allocator_type& __a)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note: std::vector<_Tp, _Alloc>::vector() [with _Tp = int; _Alloc = std::allocator<int>]
+       vector()
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note:   candidate expects 0 arguments, 4 provided
+src/caffe/test/test_spatial_transformer_layer.cpp: In instantiation of ‘caffe::SpatialTransformerLayerTest<TypeParam>::SpatialTransformerLayerTest() [with TypeParam = caffe::CPUDevice<double>]’:
+src/caffe/test/test_spatial_transformer_layer.cpp:456:5:   required from ‘testing::Test* testing::internal::TestFactoryImpl<TestClass>::CreateTest() [with TestClass = caffe::SpatialTransformerLayerTest_TestThetaGradient_Test<caffe::CPUDevice<double> >]’
+src/caffe/test/test_spatial_transformer_layer.cpp:485:1:   required from here
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: error: no matching function for call to ‘std::vector<int>::vector(<brace-enclosed initializer list>)’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note: candidates are:
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note: template<class _InputIterator> std::vector<_Tp, _Alloc>::vector(_InputIterator, _InputIterator, const allocator_type&)
+         vector(_InputIterator __first, _InputIterator __last,
+         ^
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note:   template argument deduction/substitution failed:
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note:   cannot convert ‘5’ (type ‘int’) to type ‘const allocator_type& {aka const std::allocator<int>&}’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note: std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]
+       vector(const vector& __x)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note: std::vector<_Tp, _Alloc>::vector(std::vector<_Tp, _Alloc>::size_type, const value_type&, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::size_type = long unsigned int; std::vector<_Tp, _Alloc>::value_type = int; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(size_type __n, const value_type& __value = value_type(),
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note:   candidate expects 3 arguments, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note: std::vector<_Tp, _Alloc>::vector(const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(const allocator_type& __a)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note: std::vector<_Tp, _Alloc>::vector() [with _Tp = int; _Alloc = std::allocator<int>]
+       vector()
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note:   candidate expects 0 arguments, 4 provided
+src/caffe/test/test_spatial_transformer_layer.cpp: In instantiation of ‘caffe::SpatialTransformerLayerTest<TypeParam>::SpatialTransformerLayerTest() [with TypeParam = caffe::CPUDevice<float>]’:
+src/caffe/test/test_spatial_transformer_layer.cpp:456:5:   required from ‘testing::Test* testing::internal::TestFactoryImpl<TestClass>::CreateTest() [with TestClass = caffe::SpatialTransformerLayerTest_TestThetaGradient_Test<caffe::CPUDevice<float> >]’
+src/caffe/test/test_spatial_transformer_layer.cpp:485:1:   required from here
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: error: no matching function for call to ‘std::vector<int>::vector(<brace-enclosed initializer list>)’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note: candidates are:
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note: template<class _InputIterator> std::vector<_Tp, _Alloc>::vector(_InputIterator, _InputIterator, const allocator_type&)
+         vector(_InputIterator __first, _InputIterator __last,
+         ^
+/usr/include/c++/4.8/bits/stl_vector.h:398:9: note:   template argument deduction/substitution failed:
+src/caffe/test/test_spatial_transformer_layer.cpp:83:36: note:   cannot convert ‘5’ (type ‘int’) to type ‘const allocator_type& {aka const std::allocator<int>&}’
+         blob_top_(new Blob<Dtype>()) {
+                                    ^
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from src/caffe/test/test_spatial_transformer_layer.cpp:3:
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note: std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]
+       vector(const vector& __x)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:310:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note: std::vector<_Tp, _Alloc>::vector(std::vector<_Tp, _Alloc>::size_type, const value_type&, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::size_type = long unsigned int; std::vector<_Tp, _Alloc>::value_type = int; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(size_type __n, const value_type& __value = value_type(),
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:295:7: note:   candidate expects 3 arguments, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note: std::vector<_Tp, _Alloc>::vector(const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<int>]
+       vector(const allocator_type& __a)
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:256:7: note:   candidate expects 1 argument, 4 provided
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note: std::vector<_Tp, _Alloc>::vector() [with _Tp = int; _Alloc = std::allocator<int>]
+       vector()
+       ^
+/usr/include/c++/4.8/bits/stl_vector.h:248:7: note:   candidate expects 0 arguments, 4 provided

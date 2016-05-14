@@ -1,0 +1,33 @@
+src/caffe/layers/cudnn_conv_layer.cu(33): error: argument of type "cudnnAddMode_t" is incompatible with parameter of type "const void *"
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=float]" 
+(115): here
+
+src/caffe/layers/cudnn_conv_layer.cu(33): error: argument of type "const void *" is incompatible with parameter of type "cudnnTensorDescriptor_t"
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=float]" 
+(115): here
+
+src/caffe/layers/cudnn_conv_layer.cu(33): error: argument of type "const void *" is incompatible with parameter of type "cudnnTensorDescriptor_t"
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=float]" 
+(115): here
+
+src/caffe/layers/cudnn_conv_layer.cu(33): error: too many arguments in function call
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=float]" 
+(115): here
+
+src/caffe/layers/cudnn_conv_layer.cu(33): error: argument of type "cudnnAddMode_t" is incompatible with parameter of type "const void *"
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=double]" 
+(115): here
+
+src/caffe/layers/cudnn_conv_layer.cu(33): error: argument of type "const void *" is incompatible with parameter of type "cudnnTensorDescriptor_t"
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=double]" 
+(115): here
+
+src/caffe/layers/cudnn_conv_layer.cu(33): error: argument of type "const void *" is incompatible with parameter of type "cudnnTensorDescriptor_t"
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=double]" 
+(115): here
+
+src/caffe/layers/cudnn_conv_layer.cu(33): error: too many arguments in function call
+          detected during instantiation of "void caffe::CuDNNConvolutionLayer<Dtype>::Forward_gpu(const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &, const std::vector<caffe::Blob<Dtype> *, std::allocator<caffe::Blob<Dtype> *>> &) [with Dtype=double]" 
+(115): here
+
+8 errors detected in the compilation of "/tmp/tmpxft_0000d986_00000000-16_cudnn_conv_layer.compute_50.cpp1.ii".
