@@ -1,0 +1,1 @@
+labelDef = {"left clavicle": 1, "left lung": 2, "heart": 3, "right clavicle": 4, "right lung": 5}

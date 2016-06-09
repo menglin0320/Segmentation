@@ -18,16 +18,30 @@ template <typename Dtype>
 void PcaGetCoordLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
   //reshape top
-  int top_shape_arr[3] = {bottom[0]->shape(0),bottom[0]->shape(2),bottom[0]->shape(3)};
+  int top_shape_arr[3] = {bottom[3]->shape(0),bottom[0]->shape(1),bottom[0]->shape(2)};
   vector<int> top_shape(top_shape_arr, top_shape_arr + 3);
   top[0]->Reshape(top_shape);
+
   Blob<Dtype> & sigma_ = *this->blobs_[0]; 
+  Blob<Dtype> * avg_q = bottom[2];
+  sigma_.Reshape(top_shape);
+  for(int i = 0; i < top_shape[0];++i)
+  {
+    switch (Caffe::mode()) {
+    case Caffe::GPU:
+      caffe_copy(avg_q->count(), avg_q->gpu_data(),
+          static_cast<Dtype*>(&sigma_.mutable_gpu_data()[i * avg_q->count()]));
+      break;
+    case Caffe::CPU:  
+      caffe_copy(avg_q->count(), avg_q->cpu_data(),
+          static_cast<Dtype*>(&sigma_.mutable_cpu_data()[i * avg_q->count()]));
+      break;
+    default:
+      LOG(FATAL) << "Unknown caffe mode.";      
+    }
+  }
 
-  sigma_.Reshape(bottom[2]->shape());
-  sigma_.CopyFrom(*bottom[2]);
-
-  int Tcount = bottom[3]->count();
-  memset(bottom[3]->mutable_cpu_diff(),0,Tcount * sizeof(Dtype));
+  memset(bottom[3]->mutable_cpu_diff(),0,bottom[3]->count() * sizeof(Dtype));
 }
 
 template <typename Dtype>
@@ -40,14 +54,14 @@ void PcaGetCoordLayer<Dtype>::Forward_cpu(
   const Dtype* Udata = bottom[0]->cpu_data();
   const Dtype* Bdata = bottom[1]->cpu_data();
   const Dtype* Tdata = bottom[3]->cpu_data();
-  int numImages = bottom[0]->shape(0);
-  t = bottom[0]->shape(1);
-  int numCoords = 2*bottom[0]->shape(2); 
+  int numImages = bottom[3]->shape(0);
+  t = bottom[0]->shape(0);
+  int numCoords = 2*bottom[0]->shape(1); 
   Dtype extended_coord[] = {1.,1.,1.};
   for (int i = 0; i < numImages; ++i)
   {
      caffe_cpu_gemv<Dtype>(CblasTrans, t,\
-     numCoords, (Dtype) 1., &Udata[i*t*numCoords],&Bdata[i* t],\
+     numCoords, (Dtype) 1., Udata,&Bdata[i* t],\
      (Dtype)1.,&sigma_.mutable_cpu_data()[i* numCoords]);
       // std::cout<<"sigma0_: "<<sigma_.cpu_data()[0]<<std::endl;
       // std::cout<<"sigma1_: "<<sigma_.cpu_data()[1]<<std::endl;
@@ -72,9 +86,9 @@ void PcaGetCoordLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 
   const Dtype* Udata = bottom[0]->cpu_data();
   const Dtype* Tdata = bottom[3]->cpu_data();
-  int numImages = bottom[0]->shape(0);
-  int t = bottom[0]->shape(1);
-  int numCoords = 2*bottom[0]->shape(2); 
+  int numImages = bottom[3]->shape(0);
+  int t = bottom[0]->shape(0);
+  int numCoords = 2*bottom[0]->shape(1); 
 
   Dtype * dEdT = bottom[3]->mutable_cpu_diff();
   Dtype * dEdSigma = sigma_.mutable_cpu_diff();
@@ -110,7 +124,7 @@ void PcaGetCoordLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     }
 
     caffe_cpu_gemv<Dtype>(CblasNoTrans, t,\
-    numCoords, (Dtype) 1., &Udata[i*t*numCoords],&dEdSigma[i* numCoords],\
+    numCoords, (Dtype) 1., Udata,&dEdSigma[i* numCoords],\
     (Dtype)0.,&dEdB[i* t]); 
   }
 }

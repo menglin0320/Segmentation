@@ -16,14 +16,14 @@ void PcaGetCoordLayer<Dtype>::Forward_gpu(
   const Dtype* Udata = bottom[0]->gpu_data();
   const Dtype* Bdata = bottom[1]->gpu_data();
   const Dtype* Tdata = bottom[3]->gpu_data();
-  int numImages = bottom[0]->shape(0);
-  t = bottom[0]->shape(1);
-  int numCoords = 2*bottom[0]->shape(2); 
+  int numImages = bottom[3]->shape(0);
+  t = bottom[0]->shape(0);
+  int numCoords = 2*bottom[0]->shape(1); 
   Dtype extended_coord[] = {1.,1.,1.};
   for (int i = 0; i < numImages; ++i)
   {
      caffe_gpu_gemv<Dtype>(CblasTrans, t,\
-     numCoords, (Dtype) 1., &Udata[i*t*numCoords],&Bdata[i* t],\
+     numCoords, (Dtype) 1., Udata,&Bdata[i* t],\
      (Dtype)1.,&sigma_.mutable_gpu_data()[i* numCoords]);
       // std::cout<<"sigma0_: "<<sigma_.gpu_data()[0]<<std::endl;
       // std::cout<<"sigma1_: "<<sigma_.gpu_data()[1]<<std::endl;
@@ -48,9 +48,9 @@ void PcaGetCoordLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*>& top,
 
   const Dtype* Udata = bottom[0]->gpu_data();
   const Dtype* Tdata = bottom[3]->gpu_data();
-  int numImages = bottom[0]->shape(0);
-  int t = bottom[0]->shape(1);
-  int numCoords = 2*bottom[0]->shape(2); 
+  int numImages = bottom[3]->shape(0);
+  int t = bottom[0]->shape(0);
+  int numCoords = 2*bottom[0]->shape(1); 
 
   Dtype * dEdT = bottom[3]->mutable_gpu_diff();
   Dtype * dEdSigma = sigma_.mutable_gpu_diff();
@@ -86,11 +86,9 @@ void PcaGetCoordLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*>& top,
     }
 
     caffe_gpu_gemv<Dtype>(CblasNoTrans, t,\
-    numCoords, (Dtype) 1., &Udata[i*t*numCoords],&dEdSigma[i* numCoords],\
+    numCoords, (Dtype) 1., Udata,&dEdSigma[i* numCoords],\
     (Dtype)0.,&dEdB[i* t]); 
   }
-}
-
 INSTANTIATE_LAYER_GPU_FUNCS(PcaGetCoordLayer);
 
 }  // namespace caffe

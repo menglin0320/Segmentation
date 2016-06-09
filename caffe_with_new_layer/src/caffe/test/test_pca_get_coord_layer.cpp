@@ -23,17 +23,21 @@ class PcaGetCoordLayerTest : public MultiDeviceTest<TypeParam> {
  	 	: numimages(4),
  	 	  T(3),
  	 	  numlabels(5),
- 	 	  blob_bottom_a_(new Blob<Dtype>(numimages,T,numlabels,2)),
+ 	 	  blob_bottom_a_(new Blob<Dtype>()),
  	 	  blob_bottom_b_(new Blob<Dtype>()),
  	 	  blob_bottom_c_(new Blob<Dtype>()),
  	 	  blob_bottom_d_(new Blob<Dtype>()),
  	 	  blob_top_(new Blob<Dtype>()) {
+        int Ushape_arr[] = {T,numlabels,2};
+        vector<int>  Ushape(Ushape_arr,Ushape_arr + 3);
+        blob_bottom_a_->Reshape(Ushape);
+
 			  int Bshape_arr[] = {numimages,T};
  	 	  	vector<int>  Bshape(Bshape_arr,Bshape_arr + 2);
  	 	  	blob_bottom_b_->Reshape(Bshape);
  	 	
- 	 		  int Qshape_arr[] = {numimages,numlabels,2};
- 	 	  	vector<int>  Qshape(Qshape_arr,Qshape_arr + 3);
+ 	 		  int Qshape_arr[] = {numlabels,2};
+ 	 	  	vector<int>  Qshape(Qshape_arr,Qshape_arr + 2);
  	 	  	blob_bottom_c_->Reshape(Qshape);
  	 	
  	 	  	int Tshape_arr[] = {numimages,2,3};
@@ -109,8 +113,15 @@ class PcaGetCoordLayerTest : public MultiDeviceTest<TypeParam> {
 
               for(int z = 0; z < width;++z)
               {
-                std::cout<<Blob_->cpu_diff()[i * channels*height*width + j * height * width\
-                  +k * width + z] <<" "; 
+                if(Caffe::mode() == Caffe::CPU)
+                  std::cout<<Blob_->cpu_diff()[i * channels*height*width + j * height * width\
+                  +k * width + z] <<" ";
+                else{
+                  # if __CUDA_ARCH__>=200
+                   std::cout<<Blob_->gpu_diff()[i * channels*height*width + j * height * width\
+                  +k * width + z] <<" ";
+                  #endif
+                }   
               }
               printf("\n");
             }
@@ -143,10 +154,11 @@ TYPED_TEST(PcaGetCoordLayerTest, TestProd) {
 
   typedef typename TypeParam::Dtype Dtype;
   LayerParameter layer_param;
-
+  printf("before setup\n");
   shared_ptr<PcaGetCoordLayer<Dtype> > layer(
   new PcaGetCoordLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
+  printf("pass setup\n");
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
 
   
