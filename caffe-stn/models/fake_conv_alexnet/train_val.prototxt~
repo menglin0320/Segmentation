@@ -95,15 +95,15 @@ layer {
 layer {
   name: "reshape1"
   type: "Reshape"
-  bottom: "data"
+  bottom: "pool1"
   top: "expand1"
   reshape_param {
     shape {
       dim: -1  # copy the dimension from below
       dim: 1
       dim: 96
-      dim: 55
-      dim: 55 # infer it from the other dimensions
+      dim: 27
+      dim: 27 # infer it from the other dimensions
     }
   }
 }
@@ -125,9 +125,12 @@ layer {
     pad: 0
     pad: 2
     pad: 2
-
+    kernel_size: 4
     kernel_size: 5	
     kernel_size: 5
+    stride: 4
+    stride: 1
+    stride: 1
     group: 2
     weight_filler {
       type: "gaussian"
@@ -136,6 +139,20 @@ layer {
     bias_filler {
       type: "constant"
       value: 0.1
+    }
+  }
+}
+layer {
+  name: "reshape2"
+  type: "Reshape"
+  bottom: "conv2"
+  top: "shorten1"
+  reshape_param {
+    shape {
+      dim: -1  # copy the dimension from below
+      dim: 5888 #256*23
+      dim: 27
+      dim: 27 # infer it from the other dimensions
     }
   }
 }
@@ -168,6 +185,21 @@ layer {
   }
 }
 layer {
+  name: "reshape3"
+  type: "Reshape"
+  bottom: "pool2"
+  top: "expand2"
+  reshape_param {
+    shape {
+      dim: -1  # copy the dimension from below
+      dim: 1
+      dim: 5888
+      dim: 13
+      dim: 13 # infer it from the other dimensions
+    }
+  }
+}
+layer {
   name: "conv3"
   type: "Convolution"
   bottom: "pool2"
@@ -182,8 +214,15 @@ layer {
   }
   convolution_param {
     num_output: 384
+    pad: 0
     pad: 1
+    pad: 1
+    kernel_size: 256
     kernel_size: 3
+    kernel_size: 3
+    stride:256
+    stride:1
+    stride:1
     weight_filler {
       type: "gaussian"
       std: 0.01
